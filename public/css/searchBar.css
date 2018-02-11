@@ -1,8 +1,9 @@
 
     .flight-engine {
-    position: absolute;
+    position: relative;
     left: 0px;
     right: 0px;
+        top: 2px;
     bottom: 50px;
     padding: 20px;
     z-index: 999;
@@ -92,14 +93,4 @@
     border-radius: 100%;
     position: absolute;
     top: -32px;
-}$('.tabing ul li a').click(function(e) {
-         e.stopPropagation();
-         e.preventDefault();
-         var tabcont = $(this).attr('href');
-         console.log(tabcont);
-         $('.tabing a').removeClass('active');
-         $(this).addClass('active');
-         $('.tab1').hide();
-         $(tabcont).show();
-     });
-
+}
