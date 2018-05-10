@@ -5,19 +5,18 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 class Plane extends Model
-{
+{                                               //model of the plane map with the plane table
     Protected $fillable = ['plane_id',
 							'plane_capacity',
-							'takeoff_airport',
-							'middle_stop_airport',
-							'landing_airport',
+                            'airline',
+					        'airline_img',
 							'ticket_price',
 						];
-	public function planeShedules(){
-        return $this->hasMany('App\PlaneShedule'); 
+	public function planeSchedules(){
+        return $this->hasMany('App\PlaneSchedule');
     }
 
-    public function userPlaneReservations(){
+    public function userPlaneReservations(){                                    //relationship between other tables
         return $this->hasMany('App\UserPlaneReservation'); 
     }
 

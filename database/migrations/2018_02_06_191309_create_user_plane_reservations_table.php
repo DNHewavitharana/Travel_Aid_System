@@ -17,22 +17,17 @@ class CreateUserPlaneReservationsTable extends Migration
             $table->increments('id');
             $table->integer('plane_id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->integer('shedule_id')->unsigned();
-
-            $table->integer('no_infance')->nullable();
+            $table->integer('schedule_id')->unsigned();
             $table->integer('no_adult');
-            $table->integer('no_child')->nullable();
-            $table->date('arrival_date');
 
-            $table->string('beginning_airport');
-            $table->string('destination_airport');
 
             $table->double('total_amount');
             $table->timestamps();
 
             $table->foreign('plane_id')->references('plane_id')->on('planes');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('shedule_id')->references('id')->on('plane_shedules');
+
+            $table->foreign('schedule_id')->references('id')->on('plane_schedules');
         });
     }
 

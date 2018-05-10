@@ -14,7 +14,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
+    protected $fillable = [                                 //model of the user map with the user table
         'first_name', 'last_name', 'gender', 'telephone_no', 'role_id', 'email', 'password',
     ];
 
@@ -28,7 +28,7 @@ class User extends Authenticatable
     ];
 
     public function plane(){
-        return $this->belongsTo('App\Plane'); 
+        return $this->belongsTo('App\Plane');       //relationship between other tables
     }
 
     public function role(){

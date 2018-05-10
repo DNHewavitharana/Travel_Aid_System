@@ -16,10 +16,13 @@ class CreatePlanesTable extends Migration
         Schema::create('planes', function (Blueprint $table) {
             //$table->increments('id');
             $table->integer('plane_id')->unsigned()->unique();
+            $table->integer('airline_id')->unsigned();
             $table->integer('plane_capacity')->unsigned();
-            $table->string('airline');
             $table->double('ticket_price');
             $table->timestamps();
+
+           //$table->foreign('airline_id')->references('id')->on('airlines');
+
         });
     }
     

@@ -2325,7 +2325,7 @@ body{
 }
 
 .navbar, .navbar.navbar-default {
-  background-color: #9c27b0;
+  /*background-color: #9c27b0;*/
   color: #FFFFFF;
 }
 

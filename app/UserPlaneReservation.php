@@ -8,18 +8,18 @@ class UserPlaneReservation extends Model
 {
     Protected $fillable = ['plane_id',
 							'user_id',
-							'shedule_id',
-							'no_infance',
+							'schedule_id',
 							'no_adult',
-							'no_child',
-							'beginning_airport',
-							'destination_airport',
+                            'takeoff_date',
+							'arrival_date',
+							'takeoff_airport',
+							'landing_airport',
 							'total_amount',
 						];
 	public function user(){
         return $this->belongsTo('App\User'); 
-    }
-	public function plane(){
-        return $this->belongsToMany('App\User'); 
+    }                                                       //relationship between other tables
+	public function planes(){
+        return $this->belongsToMany('App\Plane');
     }
 }

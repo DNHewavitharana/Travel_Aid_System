@@ -1,5 +1,6 @@
 
-    .flight-engine {
+.flight-engine {
+
     position: relative;
     left: 0px;
     right: 0px;
@@ -62,6 +63,13 @@
     background: #f5f5f5;
     font-size: 14px;
     line-height: 20px;
+}
+
+.persent-one1 {
+    width: 13%;
+    float: left;
+    margin-left: 4%;
+    margin-right: 1%;
 }
 .persent-one {
     width: 19%;
