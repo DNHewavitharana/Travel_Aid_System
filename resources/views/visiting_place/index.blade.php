@@ -1,213 +1,5 @@
 @extends('layouts.app')
 @section('content')
-<!--
-<html>
-
-<head>
-    <link rel="stylesheet" type="text/css"
-          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="{{ asset('css/searchBar.css') }}" rel="stylesheet">
-
-
-    <style>
-        #map {
-            height: 400px;
-            width: 100%;
-        }
-    </style>
-
-</head>
-
-
-<body>
-
-<div class="flight-engine">
-    <div class="tabing">
-        <ul>
-            <li><a class="active" href="#1"><i class="fa fa-plane" aria-hidden="true"></i>Visiting Place</a>
-            </li>
-        </ul>
-            <div class="tab-content">
-                <div id="1" class="tab1 active">
-                    <div class="flight-tab row">
-                        <div class="persent-one">
-                            <i class="fa fa-map-marker" aria-hidden="true"></i>
-                            <input type="text" name="takeoff_airport" class="textboxstyle" id="pac-input"
-                                   placeholder="Enter a location">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-    </div>
-</div>
-
-<div class="container">
-    <div id="map"></div>
-    <div id="infowindow-content">
-        <span id="place-name" class="title"></span><br>
-        <span id="place-id"></span><br>
-        <span id="place-address"></span>
-    </div>
-
-
-    <div id="right-panel">
-        <h2 id="title"></h2>
-        <table id="places" style="margin-left: 150px"></table>
-    </div>
-</div>
-<script>
-
-    var loco;
-
-    function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: -33.8688, lng: 151.2195},
-            zoom: 13
-        });
-
-        var input = document.getElementById('pac-input');
-
-        var autocomplete = new google.maps.places.Autocomplete(
-            input, {placeIdOnly: true});
-        autocomplete.bindTo('bounds', map);
-
-        var service = new google.maps.places.PlacesService(map);
-        var getNextPage = null;
-        var moreButton = document.getElementById('more');
-
-        var infowindow = new google.maps.InfoWindow();
-        var infowindowContent = document.getElementById('infowindow-content');
-        infowindow.setContent(infowindowContent);
-        var geocoder = new google.maps.Geocoder;
-
-        var markers = [];
-
-        autocomplete.addListener('place_changed', function () {
-
-            var marker = new google.maps.Marker({
-                map: map
-            });
-            marker.addListener('click', function () {
-                infowindow.open(map, marker);
-            });
-            infowindow.close();
-            var place = autocomplete.getPlace();
-
-
-            if (!place.place_id) {
-                return;
-            }
-            geocoder.geocode({'placeId': place.place_id}, function (results, status) {
-
-                if (status !== 'OK') {
-                    window.alert('Geocoder failed due to: ' + status);
-                    return;
-                }
-                // Clear out the old markers.
-                markers.forEach(function (marker) {
-                    marker.setMap(null);
-                });
-                markers = [];
-
-                map.setZoom(16);
-                map.setCenter(results[0].geometry.location);
-
-
-                // Set the position of the marker using the place ID and location.
-                marker.setPlace({
-                    placeId: place.place_id,
-                    location: results[0].geometry.location
-                });
-                markers.push(marker);
-                marker.setVisible(true);
-                infowindowContent.children['place-name'].textContent = place.name;
-                infowindowContent.children['place-id'].textContent = place.place_id;
-                infowindowContent.children['place-address'].textContent =
-                    results[0].formatted_address;
-                infowindow.open(map, marker);
-
-                service.nearbySearch(
-                    {location: results[0].geometry.location, radius: 500, type: ['store']},
-                    function (results, status, pagination) {
-                        if (status !== 'OK') return;
-
-                        var infowindow1 = new google.maps.InfoWindow();
-
-                        var placesList = document.getElementById('places');
-                        var title = document.getElementById('title');
-
-                        var bounds = new google.maps.LatLngBounds();
-
-                        while (placesList.hasChildNodes()) {
-                            placesList.removeChild(placesList.firstChild);
-                        }
-                        for (var i = 0; newplace = results[i]; i++) {
-                            var placeLoc = newplace.geometry.location;
-                            var place_address = newplace.formatted_address;
-
-                            var marker = new google.maps.Marker({
-                                map: map,
-                                title: newplace.name,
-                                position: newplace.geometry.location
-                            });
-                            markers.push(marker);
-                            /*
-                            google.maps.event.addListener(marker1, 'click', function() {
-                                infowindow1.setContent('<div><strong>' + newplace.name + '</strong><br>' +
-                                    'Place ID: ' + newplace.place_id + '<br>' +
-                                    newplace.place_address + '</div>');
-                                infowindow1.open(map, this);
-
-                            });*/
-
-
-
-
-                            var row = placesList.insertRow(0);
-                            var cell1 = row.insertCell(0);
-                            var cell2 = row.insertCell(1);
-
-                            var li = document.createElement('text');
-                            li.textContent = newplace.name;
-                            cell1.appendChild(li);
-
-                            var button = document.createElement('a');
-                            button.textContent = "view";
-                            button.href = "visiting_place/get/"+place.name +"/" + newplace.place_id +"/"+ newplace.formatted_address;
-
-                            cell2.appendChild(button);
-
-
-                            bounds.extend(newplace.geometry.location);
-                        }
-
-                        map.fitBounds(bounds);
-
-                    });
-
-            });
-
-        });
-
-    }
-
-
-</script>
-
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNLpeAyelrFUasRcA1P8or2w4JVv7d01E&libraries=places&callback=initMap"
-        async defer></script>
-
-</body>
-
-
-</html>
--->
-
 
 <!DOCTYPE html>
 <html>
@@ -236,10 +28,9 @@
         }
         #listing {
             position: relative;
-            width: 500px;
+            width: 450px;
             height: 470px;
             overflow: auto;
-            left: 600px;
 
             cursor: pointer;
             overflow-x: hidden;
@@ -251,30 +42,30 @@
             font-size: 14px;
             padding: 4px;
             z-index: 5;
-            background-color: #fff;
         }
         #locationField {
             position: relative;
-            width: 190px;
+            width: 100px;
             height: 25px;
-            left: 108px;
-            top: 0px;
+            left: 10px;
+            top: 25px;
             z-index: 5;
-            background-color: #fff;
         }
         #controls {
             position: relative;
-            left: 300px;
-            width: 140px;
-            top: 0px;
+            left: 10px;
+            width: 10px;
+            top: 25px;
             z-index: 5;
-            background-color: #fff;
+
         }
         #autocomplete {
             width: 100%;
         }
         #country {
-            width: 100%;
+            width: 40%;
+            height: 30px;
+
         }
         .placeIcon {
             width: 20px;
@@ -287,7 +78,7 @@
         }
         #resultsTable {
             border-collapse: collapse;
-            width: 240px;
+            width: 300px;
         }
         #rating {
             font-size: 13px;
@@ -307,37 +98,36 @@
 </head>
 
 <body>
+<div class="container">
+    <div id="findhotels" class="col-md-12 col-lg-12 col-sm-12 col-xm-12 pull-left" style="width: 300px">
+       <h3>Find Places:</h3>
+    </div>
 
-<div id="findhotels">
-    Find hotels in:
+    <div id="locationField" class="col-md-12 col-lg-12 col-sm-12 col-xm-12 pull-left" style="width: 300px" >
+        <input id="autocomplete" placeholder="Enter a city" type="text" />
+    </div>
+
+    <div id="controls" class="col-md-6 col-lg-6 col-sm-12 col-xm-12 pull-left" style="width: 300px">
+        <select id="country">
+            <option value="all">All</option>
+            <option value="au">Australia</option>
+            <option value="br">Brazil</option>
+            <option value="ca">Canada</option>
+            <option value="fr">France</option>
+            <option value="de">Germany</option>
+            <option value="mx">Mexico</option>
+            <option value="nz">New Zealand</option>
+            <option value="it">Italy</option>
+            <option value="za">South Africa</option>
+            <option value="es">Spain</option>
+            <option value="pt">Portugal</option>
+            <option value="us" selected>U.S.A.</option>
+            <option value="uk">United Kingdom</option>
+        </select>
+    </div>
 </div>
-
-<div id="locationField">
-    <input id="autocomplete" placeholder="Enter a city" type="text" />
-</div>
-
-<div id="controls">
-    <select id="country">
-        <option value="all">All</option>
-        <option value="au">Australia</option>
-        <option value="br">Brazil</option>
-        <option value="ca">Canada</option>
-        <option value="fr">France</option>
-        <option value="de">Germany</option>
-        <option value="mx">Mexico</option>
-        <option value="nz">New Zealand</option>
-        <option value="it">Italy</option>
-        <option value="za">South Africa</option>
-        <option value="es">Spain</option>
-        <option value="pt">Portugal</option>
-        <option value="us" selected>U.S.A.</option>
-        <option value="uk">United Kingdom</option>
-    </select>
-</div>
-
-<div id="map"></div>
-
-<div id="listing">
+<div id="map" class="col-md-6 col-lg-6 col-sm-6 col-xm-6 pull-left"></div>
+<div id="listing" class="col-md-4 col-lg-4 col-sm-4 col-xm-4 pull-right">
     <table id="resultsTable">
         <tbody id="results"></tbody>
     </table>
@@ -648,6 +438,7 @@
         async defer></script>
 
 </body>
+
 @endsection
 
 </html>

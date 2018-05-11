@@ -13,6 +13,13 @@ $date2=date_create("$data->check_out");
 $diff=date_diff($date1,$date2);
 $date_diff= $diff->format("%R%a")+0;
 $nights= $date_diff-1;
+
+$room_price= $data->price;
+$amount = $room_price * $nights;
+$tax= $amount * 0.02;
+$grand_tot= $amount + $tax;
+
+
 ?>
 <head>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -64,8 +71,8 @@ $nights= $date_diff-1;
                                         <td>
                                             <div _ngcontent-c33="" class="well" style="width: 200px">
                                                 <p _ngcontent-c33="" class="ng-tns-c33-5">Check Out</p>
+                                                <p _ngcontent-c33="" class="date">{{$data->check_out}}</p>
 
-                                                <span _ngcontent-c33="" class="font-size-13">{{$data->check_out}}</span>
                                             </div>
                                         </td></tr></table>
                                 </div>
@@ -96,17 +103,12 @@ $nights= $date_diff-1;
                             </div>
                         </div>
                     </div>
-
-
                 </div>
-
-
             </div>
 
-    <form method="post" action="{{route('hotel_booking.search')}}">
+    <form method="post" action="{{route('hotel_booking.checker')}}">
         {{ csrf_field() }}
         <div class="well col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-left" style="background-color: white">
-
             <div _ngcontent-c34="" class="clearfix com-wrap">
                 <div _ngcontent-c34="" class="wrap-header clearfix">
 
@@ -130,7 +132,7 @@ $nights= $date_diff-1;
                                     </div>
                                     <div _ngcontent-c34="" class="col-md-4 infor-box">
                                         <p _ngcontent-c34="" class="ng-tns-c34-6"><b>First Name *</b></p>
-                                        <input _ngcontent-c34="" class="form-control ng-untouched ng-pristine ng-invalid"  pattern="[a-zA-Z ]+" placeholder="First Name" required type="text">
+                                        <input _ngcontent-c34="" autofocus="" class="form-control ng-untouched ng-pristine ng-invalid"  pattern="[a-zA-Z ]+" placeholder="First Name" required type="text">
                                         <!---->
                                         <!---->
                                     </div>
@@ -167,15 +169,11 @@ $nights= $date_diff-1;
 
                             </div>
                         </div>
-
                 </div>
-
             </div>
         </div>
         <div class="well col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-left"  style="background-color: white">
-
                 <div _ngcontent-c34="" class="wrap-header clearfix">
-
                 <div _ngcontent-c33="" class="com-header pull-left"><span _ngcontent-c33="" class="number"><h4><strong>3. </strong></span><span _ngcontent-c33="" class="room-details"> Payment Details</h2></span>
                 </div>
             </div>
@@ -199,14 +197,14 @@ $nights= $date_diff-1;
 
                                         <li _ngcontent-c36="" >
                                             <span _ngcontent-c36="" class="pull-left">Nightly Rate</span>
-                                            <span _ngcontent-c36="" class="pull-right">LKR 12,733</span>
+                                            <span _ngcontent-c36="" class="pull-right">{{$data->price}}</span>
                                         </li><li _ngcontent-c36="">
                                             <span _ngcontent-c36="" class="pull-left">No. of Rooms</span>
-                                            <span _ngcontent-c36="" class="pull-right">3</span>
+                                            <span _ngcontent-c36="" class="pull-right">{{$date_diff}}</span>
                                         </li>
                                         <li _ngcontent-c36="">
                                             <span _ngcontent-c36="" class="pull-left">No. of Nights</span>
-                                            <span _ngcontent-c36="" class="pull-right">3</span>
+                                            <span _ngcontent-c36="" class="pull-right">{{$nights}}</span>
                                         </li>
                                     </ul>
 
@@ -218,7 +216,7 @@ $nights= $date_diff-1;
                                             <h4> <p _ngcontent-c36="">Total Room Rate</p></h4>
                                         </div>
                                         <div _ngcontent-c36="" class="pull-right total-room-rate-price">
-                                            <h4> <p _ngcontent-c36="">LKR 103,096</p></h4>
+                                            <h4> <p _ngcontent-c36="">{{$amount}}</p></h4>
                                         </div>
                                     </div>
                                 </div>
@@ -228,7 +226,7 @@ $nights= $date_diff-1;
                                             <p _ngcontent-c36="">Tax &amp; Service fee</p>
                                         </div>
                                         <div _ngcontent-c36="" class="pull-right">
-                                            <p _ngcontent-c36="">LKR 31,207</p>
+                                            <p _ngcontent-c36="">LKR {{$tax}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -238,7 +236,7 @@ $nights= $date_diff-1;
                                             <h3><b>  <p _ngcontent-c38="" class="ng-tns-c38-12">Grand Total</p></b></h3>
                                         </div>
                                         <div _ngcontent-c38="" class="pull-right last-price">
-                                            <h3> <b>  <p _ngcontent-c38="" class="ng-tns-c38-12"> LKR 134,303</p></b></h3>
+                                            <h3> <b>  <p _ngcontent-c38="" class="ng-tns-c38-12">LKR {{$grand_tot}}</p></b></h3>
                                         </div>
                                     </div>
                                 </div>
@@ -267,7 +265,7 @@ $nights= $date_diff-1;
                                 <div class="form-group">
                                     <label for="cardNumber">CARD NUMBER</label>
                                     <div class="input-group">
-                                        <input type="tel" class="form-control" name="cardNumber" placeholder="Valid Card Number" autocomplete="cc-number" required="" autofocus="" aria-required="true">
+                                        <input type="tel" class="form-control" name="cardNumber" placeholder="Valid Card Number" autocomplete="cc-number" required=""  aria-required="true">
                                         <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
                                     </div>
                                 </div>
@@ -305,14 +303,9 @@ $nights= $date_diff-1;
 
         </div>
     </form>
-
 </div>
 </body>
-
 @endsection
 </html>
-
-
-
 
 

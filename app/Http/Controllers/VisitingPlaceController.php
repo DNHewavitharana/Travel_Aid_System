@@ -32,8 +32,9 @@ class VisitingPlaceController extends Controller
         if ($place === null){
             $this->store($index_id, $name);
         }
-        return view('visiting_place.check', ['name' => $name, "place_name"=>$place_name]);
+        $locPlace=VisitingPlace::where('index_id', $index_id)->first();
 
+        return view('visiting_place.check', ['name' => $name, "place_name"=>$place_name, 'place'=>$locPlace]);
     }
 
 

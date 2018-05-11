@@ -6,6 +6,7 @@
 use Carbon\Carbon;
 
 $today = Carbon::today();
+$search_detail=$search_detail;
 
 ?>
 <head>
@@ -114,7 +115,7 @@ $today = Carbon::today();
                                 <br/>
 
                                 <div _ngcontent-c17="" class="col-md-4 col-sm-3">
-                                    <p _ngcontent-c17="" class="dis-price">{{ $resultHotels->room_price}}</p>
+                                    <p _ngcontent-c17="" class="dis-price">LKR {{ $resultHotels->room_price}}</p>
                                     <p _ngcontent-c17="" class="per-night">
                                     <span _ngcontent-c17="">
                                         <i _ngcontent-c17="" aria-hidden="true" class="fa fa-sort-desc fa-rotate-180"></i> avg/night

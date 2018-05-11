@@ -20,7 +20,6 @@
          * element that contains the map. */
         #map {
             height: 100%;
-            padding-top: 100px;
         }
 
         #floating-panel {
@@ -60,7 +59,6 @@
             overflow: auto;
         }
         #map {
-            margin-top: 130px;
             margin-right: 400px;
         }
         #floating-panel {
@@ -87,19 +85,15 @@
 <body>
 
 <div id="txt">
-    <strong>Start:</strong>
     <input hidden id="start" value="{{$place_name}}" type="text" />
     <br>
-    <strong>End:</strong>
-
-        <input hidden id="end" value="{{$name}}" type="text" />
+    <input hidden id="end" value="{{$name}}" type="text" />
 </div>
-{{$place_name}}
-<br/>
-{{$name}}
-
+<div>
+    <h3 style="padding-left: 10%">{{$name}}</h3>
+</div>
 <div id="right-panel"></div>
-<div id="map"></div>
+<div id="map" style="padding-top: 1%"></div>
 <script>
     function initMap() {
         var directionsDisplay = new google.maps.DirectionsRenderer;
@@ -137,20 +131,20 @@
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNLpeAyelrFUasRcA1P8or2w4JVv7d01E&callback=initMap">
 </script>
-<div class="container">
-    <div class="row container-fluid">
-        <form method="post" action="{{route('comments.store')}}">
+<br/><br/>
+<div class="container" style="background-color: white">
+    <div class="row container-fluid" style="width: 90%">
+        <form method="post" action="{{route('comments.store')}}" enctype="multipart/form-data">
             {{ csrf_field() }}
 
-            <input  type="hidden" name="commentable_type" value="" />
+            <input  type="hidden" name="commentable_type" value="App\VisitingPlace" />
 
-            <input  type="hidden" name="commentable_id" value="  " />
+            <input  type="hidden" name="commentable_id" value="{{$place->id}}" />
 
 
             <div class="form-group">
                 <label for="company-content">Comment</label>
                 <textarea placeholder="Enter Comment"
-                          style="resize: vertical"
                           id="comment-content"
                           name="body"
                           spellcheck="false"
@@ -168,11 +162,58 @@
                 <input type="submit" class="btn btn-primary" value="Submit"/>
             </div>
         </form>
+    </div>
+    <br/>
+    <br/>
 
+    <div class="row">
+        <div class="col-md-12 col-lg-10 col-sm-12 col-xm-12">
+
+            <!-- Fluid width widget -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <span class="glyphicon glyphicon-comment"></span> 
+                        Recent Comments
+                    </h3>
+                </div>
+                @foreach($place->comments as $comment)
+                <div class="panel panel-default">
+
+                <div class="panel-body">
+                    <ul class="media-list">
+                        <li class="media">
+                            <div class="media-left">
+                                <img src="http://placehold.it/60x60" class="img-circle">
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">
+                                    <small>
+                                        <a href="users/{{$comment->user->id}}">
+                                            {{$comment->user->name}} {{$comment->user->email}}</a>
+                                        <br>
+                                        commented on {{$comment->created_at}}
+                                    </small>
+                                </h4>
+                                <p>
+                                    {{$comment->body}}
+                                </p>
+                                <b> Proof: </b>
+                                <p> <img src='/images/comment/{{$comment->image1}}' width="250" height="150">
+                                    </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                </div>
+                @endforeach
+            </div>
+            <!-- End fluid width widget -->
+
+
+        </div>
     </div>
 
-
-    @include('partials.comments')
 
     </div>
     </div>

@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::resource('comments','CommentsController');
+Route::resource('comments','CommentController');
 Route::get('/{name}',function(){
     return redirect('/');
 })->where('name','[A-Za-z]+');
@@ -26,29 +26,18 @@ Route::get('/{name}',function(){
 Route::middleware(['auth'])->group(function() {
 
     Route::resource('plane_schedules', 'PlaneScheduleController');
-
     Route::post('plane_schedules/review', 'PlaneScheduleController@review')->name('plane_schedules.review');
     Route::post('plane_schedules/checker', 'PlaneScheduleController@checker')->name('plane_schedules.checker');
-
-
-
     Route::post('plane_schedules/search', 'PlaneScheduleController@search')->name('plane_schedules.search');
+
+
 
     Route::post('hotel_booking/search', 'HotelBookingController@search')->name('hotel_booking.search');
     Route::post('hotel_booking/view', 'HotelBookingController@view')->name('hotel_booking.view');
     Route::post('hotel_booking/review', 'HotelBookingController@review')->name('hotel_booking.review');
-
-
-
-
-
-
+    Route::post('hotel_booking/checker', 'HotelBookingController@checker')->name('hotel_booking.checker');
     Route::get('hotel_booking/allHotel', 'HotelBookingController@allHotel')->name('hotel_booking.allHotel');
-
     Route::post('hotel_booking/addRoom', 'HotelBookingController@addRoom')->name('hotel_booking.addRoom');
-
-
-
 
 
     Route::resource('visiting_place', 'VisitingPlaceController');

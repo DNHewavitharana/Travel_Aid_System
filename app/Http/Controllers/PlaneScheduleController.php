@@ -30,15 +30,15 @@ class PlaneScheduleController extends Controller
 
     public function checker(Request $request)
     {
+        $exists = DB::table('cards')->where('number',$request->input('cardNumber'))->first();
 
-        $data = Card::WHERE('number', $request->input('code'))->get();
-
-        if ($data){
+        if ($exists){
             $today = Carbon::today();
-            return redirect()->route('plane_schedules.index', ['today'=>$today])
-                ->with('success' , 'Project created successfully');
-        }
 
+            return redirect()->route('plane_schedules.index', ['today'=>$today])
+                ->with('success' , 'Payment Done Successfully');
+        }
+        return back()->withInput()->with('errors', 'Error creating new company');
     }
 
     public function search(Request $request){

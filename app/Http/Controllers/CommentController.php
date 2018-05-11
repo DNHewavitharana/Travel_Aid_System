@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -35,16 +36,16 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
+
         $photo_room = "";
         if($request->hasFile('photo')){
-            $destinationPath="images/hotel";
+            $destinationPath="images/comment";
             $file=$request->photo;
             $extension=$file->getClientOriginalExtension();
             $fileName=rand(10000,99999).".".$extension;
             $file->move($destinationPath,$fileName);
             $photo_room =$fileName;
         }
-
         if(Auth::check()){
             $comment = Comment::create([
                 'body' => $request->input('body'),

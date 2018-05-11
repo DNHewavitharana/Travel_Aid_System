@@ -91,6 +91,13 @@
         </div>
 
     </nav>
+
+</div>
+<div class="container">
+
+    @include('partials.errors')
+    @include('partials.success')
+
 </div>
     @yield('content')
 </body>

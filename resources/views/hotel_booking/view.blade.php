@@ -32,6 +32,8 @@ $today = Carbon::today();
             <input hidden type="text" value="{{$room_details->country}}"  name="hotel_country" >
             <input hidden type="text" value="{{$room_details->name}}"  name="hotel_name" >
 
+            <input hidden type="number" value="{{ $room_details->price}}" name="price">
+
             <input hidden type="number" value="{{$resultHotels->no_rooms}}" name="no_rooms">
 
             <div class="col-md-12 col-lg-12 col-sm-12 pull-left">

@@ -29,7 +29,7 @@
                                 {{$comment->body}}
                             </p>
                             <b> Proof: </b>
-                            <p>{{$comment->image1}}</p>
+                            <p>{{$comment->url}}</p>
                         </div>
                     </li>
                 </ul>
@@ -37,6 +37,7 @@
             @endforeach
         </div>
         <!-- End fluid width widget -->
+
 
     </div>
 </div>
