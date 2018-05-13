@@ -59,7 +59,6 @@
           
         </div>
 
-     <script src="{{ asset('js/searchBar.js') }}"></script>
     </div>
 
 

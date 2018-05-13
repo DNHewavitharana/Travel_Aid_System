@@ -99,7 +99,7 @@ $today = Carbon::today();
                                         rooms left
                                         <br/>
                                     </div>
-                                    <button _ngcontent-c25="" class="btn btn-primary" type="submit">
+                                    <button _ngcontent-c25="" name="select" class="btn btn-primary" type="submit">
                                         Select Room
                                     </button>
 

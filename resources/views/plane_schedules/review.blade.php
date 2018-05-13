@@ -31,7 +31,7 @@ $grand_price =$total_price - $discount_price;
     <div class="well col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-left" style="background-color: white">
 
         <div _ngcontent-c33="" class="wrap-header clearfix">
-            <div _ngcontent-c33="" class="com-header pull-left"><span _ngcontent-c33="" class="number"><h4><strong>1. </strong></span><span _ngcontent-c33="" class="room-details"> Room Details</h2></span>
+            <div _ngcontent-c33="" class="com-header pull-left"><span _ngcontent-c33="" class="number"><h4><strong>1. </strong></span><span _ngcontent-c33="" class="room-details"> Flight Details</h2></span>
             </div>
             <br/>
         </div>
@@ -59,8 +59,9 @@ $grand_price =$total_price - $discount_price;
                             <table><tr><td>
 
                                         <div _ngcontent-c33="" class="well" style="width: 200px">
+                                            <p _ngcontent-c33="" class="ng-tns-c33-5">Departure</p>
+                                            <br/>
                                             <p _ngcontent-c33="" class="ng-tns-c33-5">{{$data->takeoff_airport}}</p>
-                                            <p _ngcontent-c33="" class="date"><br/></p>
                                             <span _ngcontent-c33="" class="font-size-13">{{$data->takeoff_time1}} hrs</span>
                                         </div>
 
@@ -69,8 +70,9 @@ $grand_price =$total_price - $discount_price;
 
                                     <td>
                                         <div _ngcontent-c33="" class="well" style="width: 200px">
+                                            <p _ngcontent-c33="" class="ng-tns-c33-5">Arrival</p>
+                                            <br/>
                                             <p _ngcontent-c33="" class="ng-tns-c33-5">{{$data->landing_airport}}</p>
-                                            <p _ngcontent-c33="" class="date"><br/>  </p>
                                             <span _ngcontent-c33="" class="font-size-13">{{$data->landing_time1}} hrs</span>
                                         </div>
                                     </td></tr></table>

@@ -11,7 +11,7 @@ $today = Carbon::today();
 $date1=date_create("$data->check_in");
 $date2=date_create("$data->check_out");
 $diff=date_diff($date1,$date2);
-$date_diff= $diff->format("%R%a")+0;
+$date_diff= $diff->format("%R%a")+1;
 $nights= $date_diff-1;
 
 $room_price= $data->price;

@@ -20,7 +20,7 @@ $today = Carbon::today();
 <div class="flight-engine" style="padding-left: 200px">
     <div class="tabing" style="width: 95%">
         <ul>
-            <li><a class="active" href="#1"><i class="fa fa-plane" aria-hidden="true"></i> Hotel</a>
+            <li><a class="active" href="#1"><i class="fa fa-plane" aria-hidden="true"></i> Flight</a>
                 <br/>
             </li>
         </ul>
@@ -61,7 +61,6 @@ $today = Carbon::today();
         </form>
 
     </div>
-    <script src="{{ asset('js/searchBar.js') }}"></script>
 </div>
 
 <div class="container"  style="margin-top: 10%">

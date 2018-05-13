@@ -21,10 +21,10 @@ $today = Carbon::today();
 <div class="flight-engine">
     <div class="tabing">
         <ul>
-            <li><a class="active" href="#1"><i class="fa fa-hotel" aria-hidden="true"></i> Hotel</a>
+            <li><a class="active" href="#1"><i class="fa fa-hotel" aria-hidden="true"></i> Hotels View</a>
             </li>
         </ul>
-        <form method="post" action="{{route('hotel_booking.search')}}">
+        <form method="post" action="{{route('hotel_booking.results')}}">
             {{ csrf_field() }}
             <div class="tab-content">
                 <div id="1" class="tab1 active">
@@ -32,20 +32,6 @@ $today = Carbon::today();
                         <div class="persent-one">
                             <i class="fa fa-map-marker" aria-hidden="true"></i>
                             <input type="text" value="{{$search_detail->location}}" name="location" class="textboxstyle" id="location" placeholder="Location">
-                        </div>
-
-                        <div class="persent-one less-per">
-                            <i class="fa fa-calendar" aria-hidden="true"></i><span></span>
-                            <input  type="date"min={{$today}} value="{{$search_detail->check_in}}"  name="check_in" class="textboxstyle" id="from-check_in" placeholder="Check In Date">
-                        </div>
-                        <div class="persent-one less-per">
-                            <i class="fa fa-calendar" aria-hidden="true"></i>
-                            <input type="date" min={{$today}} value="{{$search_detail->check_out}}"  name="check_out" class="textboxstyle" id="check_out" placeholder="Check Out Date">
-                        </div>
-
-                        <div class="persent-one less-per">
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                            <input type="number" value="{{$search_detail->no_rooms}}" min=1 name="no_rooms" class="textboxstyle" id="to-date" placeholder="1 Room">
                         </div>
 
                         <div class="persent-one less-btn">
@@ -61,25 +47,14 @@ $today = Carbon::today();
     <br/>
 
     @foreach($hotels as $resultHotels)
-    <form method="post" action="{{route('hotel_booking.view')}}">
-        {{ csrf_field() }}
-        <input type="text" hidden value="{{$search_detail->location}}" name="location" >
-        <input  type="date" hidden value="{{$search_detail->check_in}}"  name="check_in" >
-        <input type="date" hidden value="{{$search_detail->check_out}}"  name="check_out" >
-        <input type="number" hidden value="{{$search_detail->no_rooms}}" name="no_rooms">
 
-        <input  type="text" hidden  name="hotel_id" value="{{$resultHotels->id}}">
-        <input  type="text" hidden  name="hotel_name" value="{{$resultHotels->name}}">
-        <input  type="text" hidden  name="hotel_address" value="{{$resultHotels->address}}">
-        <input  type="text" hidden  name="hotel_country" value="{{$resultHotels->country}}">
-
-
-        <div class="col-md-12 col-lg-12 col-sm-12 pull-left">
+        <div class="col-md-9 col-lg-9 col-sm-9 pull-left">
 
             <div class="well">
-                
+
                 <div _ngcontent-c17="" class="row sub-result-wrapper">
                     <div _ngcontent-c17="" class="col-md-3">
+                        <br/>
                         <div _ngcontent-c17="" class="hot-img">
                             <div _ngcontent-c17="" class="image-container">
                                 <img src='/images/hotel/{{$resultHotels->img}}' width="250" height="150">
@@ -90,9 +65,9 @@ $today = Carbon::today();
                         <div _ngcontent-c17="" class="hotel-content">
 
                             <div _ngcontent-c17="" class="row">
-                                <div _ngcontent-c17="" class="col-md-8 col-sm-9">
+                                <div _ngcontent-c17="" class="col-md-8 col-sm-9 pull-right">
                                     <h2 _ngcontent-c17="" class="cursor-point">
-                                       {{ $resultHotels->name}}</h2>
+                                        {{ $resultHotels->name}}</h2>
                                     <p _ngcontent-c17="" class="hot-location">
                                         <span _ngcontent-c17=""><i _ngcontent-c17="" aria-hidden="true" class="fa fa-map-marker"></i></span>
                                         {{ $resultHotels->address}}, {{ $resultHotels->country}}
@@ -106,26 +81,21 @@ $today = Carbon::today();
                                             <li _ngcontent-c17=""><b _ngcontent-c17=""><i _ngcontent-c17="" aria-hidden="true" class="fa fa-wifi"></i></b>Free WiFi</li>
                                             <!---->
                                             <li _ngcontent-c17=""><b _ngcontent-c17=""><i _ngcontent-c17="" aria-hidden="true" class="fa fa-bed"></i></b>Standard Room
-                                            </li>
+                                            </li><br/>
+
+
                                         </ul>
+
                                     </div>
+                                    per Night : LKR {{ $resultHotels->room_price}}
+
+                                    <br/>
+
 
 
                                 </div>
                                 <br/>
 
-                                <div _ngcontent-c17="" class="col-md-4 col-sm-3">
-                                    <p _ngcontent-c17="" class="dis-price">LKR {{ $resultHotels->room_price}}</p>
-                                    <p _ngcontent-c17="" class="per-night">
-                                    <span _ngcontent-c17="">
-                                        <i _ngcontent-c17="" aria-hidden="true" class="fa fa-sort-desc fa-rotate-180"></i> avg/night
-                                    </span>
-                                    </p>
-                                    <div _ngcontent-c17="" class="text-right alignme" style="padding-right: 270px">
-                                        <input type="Submit" name="submit" value="Select Room" class="btn btn-info cst-btn" id="srch">
-                                    </div>
-                                    <!---->
-                                </div>
                             </div>
 
                         </div>
@@ -134,7 +104,6 @@ $today = Carbon::today();
 
             </div>
         </div>
-    </form>
     @endforeach
 
 </div>

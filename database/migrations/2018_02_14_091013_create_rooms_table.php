@@ -25,7 +25,7 @@ class CreateRoomsTable extends Migration
             $table->double('price')->nullable();;
             $table->string('wifi_state')->nullable();;
             $table->string('welcome_drink')->nullable();;
-            $table->string('parking');
+            $table->string('parking')->nullable();
 
             $table->timestamps();
             $table->foreign('hotel_id')->references('id')->on('hotels');

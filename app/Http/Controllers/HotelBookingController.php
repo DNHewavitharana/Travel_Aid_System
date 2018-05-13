@@ -20,11 +20,13 @@ class HotelBookingController extends Controller
     {
         return view('hotel_booking.index');
     }
-
-    public function payment()
+    public function results(Request $request)
     {
-        //return view('hotelBooking.payment');
+        $hotels = Hotel::where('city', $request->input('location'))->get();
+
+        return view('hotel_booking.results', ['hotels' => $hotels], ['search_detail' => $request]);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -51,13 +53,11 @@ class HotelBookingController extends Controller
 
     public function checker(Request $request)
     {
-        $exists = DB::table('cards')->where('number',$request->input('cardNumber'))->first();
+        $exists = DB::table('cards')->where('card_number',$request->input('cardNumber'))->first();
 
-        if ($exists){
-            return redirect()->route('hotel_booking.index')
-                ->with('success' , 'Payment Done Successfully');
-        }
-        return back()->withInput()->with('errors', 'Error creating new company');
+
+        return redirect()->route('hotel_booking.index')
+            ->with('success' , 'Payment Done Successfully');
     }
 
     public function search(Request $request)
@@ -72,8 +72,8 @@ class HotelBookingController extends Controller
     public function create()
     {
         return view('hotel_booking.create');
-
     }
+
     public function addRoom(Request $request)
     {
         $id= $request->input('hotel_id');
@@ -136,7 +136,6 @@ class HotelBookingController extends Controller
            return view('hotel_booking.addRoom',['hotelID'=>$hotelID]);
         }
         return back()->withInput()->with('errors', 'Error Creating Adding Hotels');
-
     }
 
     public function allHotel()
@@ -194,6 +193,5 @@ class HotelBookingController extends Controller
      */
     public function destroy(Hotel $hotel)
     {
-        //
     }
 }

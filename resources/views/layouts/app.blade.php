@@ -37,30 +37,10 @@
                 <li><a href="{{ route('login') }}"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
                 <li><a href="{{ route('register') }}"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
                 @else
-                <li><a href="{{ route('hotel_booking.allHotel') }}"><i class="fas fa-hotel"></i> All Hotels</a></li>
-                <li><a href="{{ route('hotel_booking.create') }}"><i class="fas fa-hotel"></i> Add Hotels</a></li>
-                <li><a href="#"><i class="fas fa-building"></i> Contact</a></li>
-                <li><a href="#"><i class="fas fa-briefcase"></i>About</a></li>
-                <li><a href="#"><i class="fas fa-tasks"></i>Edit Account</a></li>
-
 
                 @if(Auth::user()->role_id == 1)
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true"> <i class="fas fa-user"></i>
-
-
-                        Admin <span class="caret"></span>
-                    </a>
-
-                    <ul class="dropdown-menu">
-                      <!--  <li><a href="#"><i class="fas fa-building"></i> Send Notifications</a></li>
-                        <li><a href="#"><i class="fas fa-briefcase"></i> Deactivate Accounts</a></li>
-                        <li><a href="#"><i class="fas fa-tasks"></i>Help</a></li>
-                        <li><a href="#"><i class="fas fa-user"></i> About</a></li> -->
-
-                    </ul>
-                </li>
-
+                <li><a href="{{ route('hotel_booking.allHotel') }}"><i class="fas fa-hotel"></i> All Hotels</a></li>
+                <li><a href="{{ route('hotel_booking.create') }}"><i class="fas fa-hotel"></i> Add Hotels</a></li>
                 @endif
 
                 <li class="dropdown">
@@ -94,9 +74,8 @@
 
 </div>
 <div class="container">
-
-    @include('partials.errors')
     @include('partials.success')
+    @include('partials.errors')
 
 </div>
     @yield('content')
@@ -170,7 +149,7 @@
     <section class="index-link">
         <div class="container">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="link-area">
                         <h3>ABOUT US</h3>
                         <P>Building Consensus among your Senior leaders to leverage your digital strengths and work on gaps which are hindering your growth.</P>
@@ -179,38 +158,27 @@
                         <li class="fa-li"><a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="link-area">
-                        <h3>PRODUCT</h3>
+                        <h3>Services</h3>
                         <ul>
-                            <li><a href="#"> Services-1</a></li>
-                            <li><a href="#"> Services-1</a></li>
-
+                            <li><a href="#">Hotel Service</a></li>
+                            <li><a href="#">Plane Service</a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="link-area">
                         <h3>COMPANY</h3>
                         <ul>
-                            <li><a href="#"> Home</a></li>
+                            <li><a href=""> Home</a></li>
                             <li><a href="#"> Blog</a></li>
                             <li><a href="#"> About</a></li>
                             <li><a href="#"> contact</a></li>
-                            <li><a href="#"> Jobs</a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="link-area">
-                        <h3>LEARM MORE</h3>
-                        <ul>
-                            <li><a href="#"> Services-1</a></li>
-                            <li><a href="#"> Services-1</a></li>
 
-                        </ul>
-                    </div>
-                </div>
             </div>
         </div>
     </section>

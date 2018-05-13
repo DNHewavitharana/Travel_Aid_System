@@ -1,6 +1,11 @@
 @extends('layouts.app')
 @section('content')
 
+<?php
+use Carbon\Carbon;
+
+$today = Carbon::today();
+?>
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -40,11 +45,11 @@
 
                         <div class="persent-one less-per">
                             <i class="fa fa-calendar" aria-hidden="true"></i><span></span>
-                            <input  type="date"  name="check_in" class="textboxstyle" required id="from-check_in" placeholder="Check In Date">
+                            <input  type="date" min={{$today}} name="check_in" class="textboxstyle" required id="from-check_in" placeholder="Check In Date">
                         </div>
                         <div class="persent-one less-per">
                             <i class="fa fa-calendar" aria-hidden="true"></i>
-                            <input type="date"  name="check_out" class="textboxstyle" required id="check_out" placeholder="Check Out Date">
+                            <input type="date" min={{$today}}  name="check_out" class="textboxstyle" required id="check_out" placeholder="Check Out Date">
                         </div>
 
                         <div class="persent-one less-per">
