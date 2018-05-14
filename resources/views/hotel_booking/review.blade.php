@@ -47,8 +47,7 @@ $grand_tot= $amount + $tax;
                     <div _ngcontent-c33="" class="row">
 
                         <div _ngcontent-c33="" class="col-md-3">
-                            <img src='/images/hotel/{{$data->room_img}}' width="250" height="200">
-
+                            <img src='/images/hotel/{{$data->img}}' width="250" height="200">
 
                         </div>
                         <div _ngcontent-c33="" class="col-md-9 hotel-name">
